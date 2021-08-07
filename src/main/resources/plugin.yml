@@ -1,0 +1,5 @@
+name: EscapePlugin
+version: ${project.version}
+main: net.kigawa.escapeplugin.EscapePlugin
+api-version: 1.17
+authors: [ kigawa ]
