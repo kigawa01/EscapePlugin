@@ -50,6 +50,15 @@ public class EscapeManager {
         }
     }
 
+    public String setWorld(String gameName,String world){
+        EscapeGame game=getGame(gameName);
+        if (game!=null){
+            return game.setWorld(world);
+        }else {
+            return "game is not exit";
+        }
+    }
+
     public EscapeGame getGame(String name){
         for (EscapeGame game:games){
             if (game.getName().equals(name)){

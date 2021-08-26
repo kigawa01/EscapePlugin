@@ -17,6 +17,7 @@ public class EscapeGame {
     public EscapeGame(EscapePlugin escapePlugin, EscapeData escapeData) {
         data = escapeData;
         this.plugin = escapePlugin;
+        save();
     }
 
     public String start() {
@@ -53,8 +54,17 @@ public class EscapeGame {
         return "";
     }
 
+    public void sendMessage(String message){
+        new InfoSender(message,join);
+    }
+
+    public void save(){
+        plugin.getRecorder().save(data,ESCAPE);
+    }
+
     public String setWorld(String world){
         data.setWorld(world);
+        save();
         return "set world";
     }
 
@@ -64,9 +74,5 @@ public class EscapeGame {
 
     public EscapePlugin getPlugin() {
         return plugin;
-    }
-
-    public void sendMessage(String message){
-        new InfoSender(message,join);
     }
 }
