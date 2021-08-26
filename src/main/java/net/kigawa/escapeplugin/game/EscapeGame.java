@@ -45,7 +45,7 @@ public class EscapeGame {
                         sendMessage("小川は、「存在をバレてから、犯人に見つからないようにヒントを残してきた。」とも言っていた。まずはヒントを探すところから始めよう。");
                 }
             }
-        }.runTaskTimer(plugin, 10, 20);
+        }.runTaskTimer(plugin, 10, 50);
 
         return "";
     }
