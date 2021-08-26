@@ -29,12 +29,14 @@ public abstract class TabList extends PluginLogger implements Named {
     }
 
     public List<String> tabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+        logger("on "+getName());
         //new instance
         List<String> tabListStr=null;
         //check null
         logger("check null");
 
         if (tabLists != null) {
+            logger("strings.length=="+strings.length);
             //when send here
             if (strings.length == getWordNumber() + 1) {
                 //get tab list
@@ -57,8 +59,9 @@ public abstract class TabList extends PluginLogger implements Named {
                 tabListStr=new ArrayList<>();
                 logger("when do not send here");
                 //check contain tabList
-                if (tabLists.contains(new EqualsCommand(strings[getWordNumber() + 1]))) {
-                    TabList tabList = tabLists.get(tabLists.indexOf(new EqualsCommand(strings[getWordNumber() + 1])));
+                if (tabLists.contains(new EqualsCommand(strings[getWordNumber()]))) {
+                    logger("tablist contain");
+                    TabList tabList = tabLists.get(tabLists.indexOf(new EqualsCommand(strings[getWordNumber()])));
                     tabListStr = tabList.tabComplete(commandSender, command, s, strings);
                 }
             }

@@ -5,9 +5,11 @@ import net.kigawa.escapeplugin.util.plugin.all.KigawaPlugin;
 
 public abstract class PluginLogger implements Logger {
     KigawaPlugin plugin;
-    public PluginLogger(KigawaPlugin kigawaPlugin){
-        plugin=kigawaPlugin;
+
+    public PluginLogger(KigawaPlugin kigawaPlugin) {
+        plugin = kigawaPlugin;
     }
+
     @Override
     public void logger(String message) {
         plugin.logger(message);

@@ -23,6 +23,11 @@ public class GetItemEscape extends SecondCommand {
     }
 
     @Override
+    public String errorMessage() {
+        return null;
+    }
+
+    @Override
     public List<String> getTabStrings(CommandSender sender, Command command, String label, String[] strings) {
         return null;
     }

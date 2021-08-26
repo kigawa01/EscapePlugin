@@ -1,12 +1,12 @@
 package net.kigawa.escapeplugin.util.plugin.all;
 
 import net.kigawa.escapeplugin.util.all.HasEnd;
+import net.kigawa.escapeplugin.util.all.Logger;
 import net.kigawa.escapeplugin.util.plugin.all.command.FirstCommand;
 import net.kigawa.escapeplugin.util.plugin.all.message.Messenger;
 import net.kigawa.escapeplugin.util.plugin.all.player.PlayerGetter;
 import net.kigawa.escapeplugin.util.plugin.all.player.Teleporter;
 import net.kigawa.escapeplugin.util.plugin.all.recorder.Recorder;
-import net.kigawa.escapeplugin.util.all.Logger;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -82,6 +82,10 @@ public abstract class KigawaPlugin extends JavaPlugin implements Logger {
 
     public void logger(boolean message) {
         logger(String.valueOf(message));
+    }
+
+    public void logger  (double message){
+        logger(Double.toString(message));
     }
 
     public void addCommand(FirstCommand command) {

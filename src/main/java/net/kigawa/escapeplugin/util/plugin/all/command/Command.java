@@ -1,6 +1,5 @@
 package net.kigawa.escapeplugin.util.plugin.all.command;
 
-import net.kigawa.escapeplugin.util.all.Util;
 import net.kigawa.escapeplugin.util.plugin.all.KigawaPlugin;
 import org.bukkit.command.CommandSender;
 
@@ -24,37 +23,37 @@ public abstract class Command extends TabList {
 
     public abstract int getWordNumber();
 
+    public abstract String errorMessage();
+
 
     public boolean onCommand(CommandSender commandSender, org.bukkit.command.Command command, String s, String[] strings) {
         plugin.logger(getName() + " onAlways");
 
         if (subCommands != null) {
-            if (subCommands.contains(new EqualsCommand(strings[getWordNumber()]))) {
-                Command subCommand = subCommands.get(subCommands.indexOf(new EqualsCommand(strings[getWordNumber()])));
-                return subCommand.onCommand(commandSender, command, s, strings);
+            if (strings.length>getWordNumber()) {
+                if (subCommands.contains(new EqualsCommand(strings[getWordNumber()]))) {
+                    Command subCommand = subCommands.get(subCommands.indexOf(new EqualsCommand(strings[getWordNumber()])));
+                    return subCommand.onCommand(commandSender, command, s, strings);
+                }
             }
         }
         //check permission
         if (checkPermission(commandSender)) {
             plugin.logger(getName() + " onNotFoundSubcommand");
-            return onThisCommand(commandSender, command, s, strings);
+
+            if (!onThisCommand(commandSender, command, s, strings)) {
+                commandSender.sendMessage(errorMessage());
+            }
+            return true;
         } else {
             commandSender.sendMessage("need permission");
         }
         return true;
     }
 
-    public void sendErrorMessage(String message,CommandSender sender){
-
-    }
-
     public void addSubcommands(Command subCommand) {
         subCommands.add(subCommand);
         addTabLists(subCommand);
-    }
-
-    public boolean checkLength(String[] strings, int length) {
-        return Util.checkLength(strings, length);
     }
 
     public boolean checkPermission(CommandSender sender) {

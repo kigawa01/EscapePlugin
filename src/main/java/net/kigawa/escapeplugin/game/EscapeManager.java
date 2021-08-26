@@ -19,4 +19,43 @@ public class EscapeManager {
             games.add(new EscapeGame(plugin,data));
         }
     }
+
+    public String start(String gameName){
+        EscapeGame game=getGame(gameName);
+        if (game!=null){
+            return game.start();
+        }else {
+            return "game is null";
+        }
+    }
+
+    public String end(String gameName){
+        EscapeGame game=getGame(gameName);
+        if (game!=null){
+            return game.end();
+        }else {
+            return "game is null";
+        }
+    }
+
+    public String create(String gameName){
+        EscapeGame escapeGame=getGame(gameName);
+        if (escapeGame==null){
+            EscapeData data=new EscapeData();
+            data.setName(gameName);
+            games.add(new EscapeGame(plugin,data));
+            return "game is created";
+        }else {
+            return "game is exit";
+        }
+    }
+
+    public EscapeGame getGame(String name){
+        for (EscapeGame game:games){
+            if (game.getName().equals(name)){
+                return game;
+            }
+        }
+        return null;
+    }
 }

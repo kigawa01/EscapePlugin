@@ -16,8 +16,6 @@ public abstract class StageCommand extends FirstCommand {
         super(plugin);
         this.plugin=plugin;
         addSubcommands(new CreateCommand(plugin,manager));
-        //addSubcommands(new SetStage1(plugin));
-        //addSubcommands(new SetStage2(plugin));
         addSubcommands(new SetStartLoc(plugin,manager));
         addSubcommands(new SetStage(plugin,manager));
     }

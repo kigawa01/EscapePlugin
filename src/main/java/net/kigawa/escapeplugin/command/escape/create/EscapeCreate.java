@@ -1,4 +1,4 @@
-package net.kigawa.escapeplugin.command.escape;
+package net.kigawa.escapeplugin.command.escape.create;
 
 import net.kigawa.escapeplugin.game.EscapeManager;
 import net.kigawa.escapeplugin.util.plugin.all.KigawaPlugin;
@@ -7,20 +7,20 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
-public class StartEscape extends EscapeCommandBase {
-    public StartEscape(KigawaPlugin kigawaPlugin, EscapeManager manager) {
-        super(kigawaPlugin,manager);
+public class EscapeCreate extends CreateCommandBase{
+    public EscapeCreate(KigawaPlugin kigawaPlugin, EscapeManager manager) {
+        super(kigawaPlugin, manager);
     }
 
     @Override
     public String getName() {
-        return "start";
+        return "create";
     }
 
     @Override
     public boolean onThisCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (strings.length==2){
-            getManager().start(strings[1]);
+        if (strings.length==3){
+            commandSender.sendMessage(getManager().create(strings[2]));
             return true;
         }
         return false;
@@ -28,7 +28,7 @@ public class StartEscape extends EscapeCommandBase {
 
     @Override
     public String errorMessage() {
-        return "/game start <game name>";
+        return "/escape create create <game name>";
     }
 
     @Override

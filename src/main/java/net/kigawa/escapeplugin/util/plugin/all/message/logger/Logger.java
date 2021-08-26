@@ -1,7 +1,7 @@
 package net.kigawa.escapeplugin.util.plugin.all.message.logger;
 
-import net.kigawa.escapeplugin.util.plugin.all.PluginUtil;
 import net.kigawa.escapeplugin.util.all.Util;
+import net.kigawa.escapeplugin.util.plugin.all.PluginUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 

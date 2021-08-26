@@ -1,8 +1,8 @@
 package net.kigawa.escapeplugin.util.plugin.game.stage;
 
 import com.sk89q.worldedit.regions.Region;
-import net.kigawa.escapeplugin.util.plugin.all.KigawaPlugin;
 import net.kigawa.escapeplugin.util.all.EqualsNamed;
+import net.kigawa.escapeplugin.util.plugin.all.KigawaPlugin;
 import org.bukkit.command.CommandSender;
 
 import java.io.File;
@@ -30,6 +30,7 @@ public class StageManager {
             allStage.add(data);
         }
     }
+
     public void returnStage(StageData stageData) {
         if (notUse.contains(new EqualsNamed(stageData.getName()))) {
             canUse.add(stageData);
@@ -74,10 +75,11 @@ public class StageManager {
             plugin.getRecorder().save(stageData, "stage");
         }
     }
-    public void setStage(String name, Region region,CommandSender sender){
-        StageData stageData=getStage(name,sender);
-        if (stageData!=null){
-            net.kigawa.escapeplugin.util.plugin.all.world.Region region1=new net.kigawa.escapeplugin.util.plugin.all.world.Region(region);
+
+    public void setStage(String name, Region region, CommandSender sender) {
+        StageData stageData = getStage(name, sender);
+        if (stageData != null) {
+            net.kigawa.escapeplugin.util.plugin.all.world.Region region1 = new net.kigawa.escapeplugin.util.plugin.all.world.Region(region);
             stageData.setStageLoc(region1.getCoordinate());
             stageData.setStageWorld(region1.getWorld());
         }
@@ -118,8 +120,8 @@ public class StageManager {
                 stageData = allStage.get(allStage.indexOf(new EqualsNamed(name)));
             }
         }
-        if (name==null){
-            stageData=getRandomStage();
+        if (name == null) {
+            stageData = getRandomStage();
         }
         return stageData;
     }
@@ -135,9 +137,10 @@ public class StageManager {
         }
         return stageData;
     }
-    public List<String> getStageNames(){
-        List<String> list=new ArrayList<>();
-        for (StageData stageData:canUse){
+
+    public List<String> getStageNames() {
+        List<String> list = new ArrayList<>();
+        for (StageData stageData : canUse) {
             list.add(stageData.getName());
         }
         return list;

@@ -7,28 +7,25 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
-public class StartEscape extends EscapeCommandBase {
-    public StartEscape(KigawaPlugin kigawaPlugin, EscapeManager manager) {
-        super(kigawaPlugin,manager);
+public class EscapeCreate extends EscapeCommandBase{
+    public EscapeCreate(KigawaPlugin kigawaPlugin, EscapeManager manager) {
+        super(kigawaPlugin, manager);
+        addSubcommands(new net.kigawa.escapeplugin.command.escape.create.EscapeCreate(kigawaPlugin,manager));
     }
 
     @Override
     public String getName() {
-        return "start";
+        return "create";
     }
 
     @Override
     public boolean onThisCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (strings.length==2){
-            getManager().start(strings[1]);
-            return true;
-        }
         return false;
     }
 
     @Override
     public String errorMessage() {
-        return "/game start <game name>";
+        return "/escape create ";
     }
 
     @Override

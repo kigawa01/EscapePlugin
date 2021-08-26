@@ -1,5 +1,8 @@
 name: EscapePlugin
 version: ${project.version}
 main: net.kigawa.escapeplugin.EscapePlugin
-api-version: 1.17
+api-version: 1.16
 authors: [ kigawa ]
+commands:
+  escape:
+    usage: /game <sub command>

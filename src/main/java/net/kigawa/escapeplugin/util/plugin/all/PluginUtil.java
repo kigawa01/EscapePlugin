@@ -1,11 +1,11 @@
 package net.kigawa.escapeplugin.util.plugin.all;
 
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PluginUtil {
@@ -40,8 +40,9 @@ public class PluginUtil {
             }
             return str.toString();
     }
-    public static  <T> List<T> changeListType(List list,Class<T> type){
-        List<T> list1=new ArrayList<>(list);
-        return list1;
+    public static void playSound(List<Player> players, Sound sound,float volume,float pitch){
+        for (Player player:players){
+            player.playSound(player.getLocation(),sound,volume,pitch);
+        }
     }
 }

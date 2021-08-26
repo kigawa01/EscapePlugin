@@ -1,5 +1,8 @@
 package net.kigawa.escapeplugin.util.all;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Util {
     public static String createString(int[] ints) {
         StringBuilder str= new StringBuilder(Integer.toString(ints[0]));
@@ -8,7 +11,11 @@ public class Util {
         }
         return str.toString();
     }
-    public static boolean checkLength(String[] string,int length){
-        return string.length==length;
+    public static<T> List<T> changeListType(List list, Class<T> type){
+        List<T> list1=new ArrayList<>();
+        for (Object o:list){
+            list1.add((T)o);
+        }
+        return list1;
     }
 }

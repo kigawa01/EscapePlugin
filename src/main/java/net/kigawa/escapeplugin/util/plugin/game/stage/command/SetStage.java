@@ -40,6 +40,11 @@ public class SetStage extends StageCommandBase {
     }
 
     @Override
+    public String errorMessage() {
+        return null;
+    }
+
+    @Override
     public List<String> getTabStrings(CommandSender sender, org.bukkit.command.Command command, String label, String[] strings) {
         if (strings.length==2){
             return getManager().getStageNames();

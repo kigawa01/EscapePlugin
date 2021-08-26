@@ -37,6 +37,11 @@ public class CreateCommand extends StageCommandBase {
     }
 
     @Override
+    public String errorMessage() {
+        return null;
+    }
+
+    @Override
     public List<String> getTabStrings(CommandSender sender, org.bukkit.command.Command command, String label, String[] strings) {
         return null;
     }
