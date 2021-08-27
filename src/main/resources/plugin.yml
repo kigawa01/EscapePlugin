@@ -6,3 +6,4 @@ authors: [ kigawa ]
 commands:
   escape:
     usage: /game <sub command>
+  gate:

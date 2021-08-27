@@ -23,7 +23,7 @@ public class SetStage extends StageCommandBase {
     @Override
     public boolean onThisCommand(CommandSender commandSender, org.bukkit.command.Command command, String s, String[] strings) {
         if (strings.length==2) {
-            Player player = PluginUtil.isPlayer(commandSender);
+            Player player = PluginUtil.getPlayer(commandSender);
             if (player != null) {
                 getManager().setStage(strings[1], WorldEditUtil.getRegion(player), commandSender);
                 commandSender.sendMessage("set stage");

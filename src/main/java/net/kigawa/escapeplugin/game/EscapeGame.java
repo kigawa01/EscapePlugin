@@ -1,6 +1,7 @@
 package net.kigawa.escapeplugin.game;
 
 import net.kigawa.escapeplugin.EscapePlugin;
+import net.kigawa.escapeplugin.gate.GateManager;
 import net.kigawa.escapeplugin.util.plugin.all.message.sender.InfoSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -12,11 +13,13 @@ public class EscapeGame {
     private EscapeData data;
     private List<Player> join;
     private EscapePlugin plugin;
+    private GateManager gateManager;
     int count;
 
-    public EscapeGame(EscapePlugin escapePlugin, EscapeData escapeData) {
+    public EscapeGame(EscapePlugin escapePlugin, EscapeData escapeData,GateManager gateManager) {
         data = escapeData;
         this.plugin = escapePlugin;
+        this.gateManager=gateManager;
         save();
     }
 
@@ -51,6 +54,7 @@ public class EscapeGame {
     }
 
     public String end() {
+        gateManager.resetAllowed();
         return "";
     }
 

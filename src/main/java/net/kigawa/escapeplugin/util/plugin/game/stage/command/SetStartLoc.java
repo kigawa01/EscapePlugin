@@ -55,7 +55,7 @@ public class SetStartLoc extends StageCommandBase {
         }
         if (strings.length==3){
             List<String> list=new ArrayList();
-            Player player= PluginUtil.isPlayer(sender);
+            Player player= PluginUtil.getPlayer(sender);
             Location loc=player.getLocation();
             list.add(Integer.toString(loc.getBlockX())+Integer.toString(loc.getBlockY())+Integer.toString(loc.getBlockX()));
             return list;

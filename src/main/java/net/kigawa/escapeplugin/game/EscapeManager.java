@@ -1,22 +1,25 @@
 package net.kigawa.escapeplugin.game;
 
 import net.kigawa.escapeplugin.EscapePlugin;
+import net.kigawa.escapeplugin.gate.GateManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EscapeManager {
     private EscapePlugin plugin;
-    public List<EscapeGame> games;
+    private GateManager gateManager;
+    private List<EscapeGame> games;
 
-    public EscapeManager(EscapePlugin escapePlugin) {
+    public EscapeManager(EscapePlugin escapePlugin,GateManager gateManager) {
         plugin = escapePlugin;
         games=new ArrayList<>();
+        this.gateManager=gateManager;
 
         List<EscapeData> escapeData=plugin.getRecorder().loadAll(EscapeData.class,EscapeGame.ESCAPE);
 
         for (EscapeData data:escapeData){
-            games.add(new EscapeGame(plugin,data));
+            games.add(new EscapeGame(plugin,data,gateManager));
         }
     }
 
@@ -43,7 +46,7 @@ public class EscapeManager {
         if (escapeGame==null){
             EscapeData data=new EscapeData();
             data.setName(gameName);
-            games.add(new EscapeGame(plugin,data));
+            games.add(new EscapeGame(plugin,data,gateManager));
             return "game is created";
         }else {
             return "game is exit";

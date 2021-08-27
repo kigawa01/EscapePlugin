@@ -3,6 +3,7 @@ package net.kigawa.escapeplugin.util.plugin.game.stage;
 import com.sk89q.worldedit.regions.Region;
 import net.kigawa.escapeplugin.util.all.EqualsNamed;
 import net.kigawa.escapeplugin.util.plugin.all.KigawaPlugin;
+import net.kigawa.escapeplugin.util.plugin.all.world.PlayerRegion;
 import org.bukkit.command.CommandSender;
 
 import java.io.File;
@@ -79,7 +80,7 @@ public class StageManager {
     public void setStage(String name, Region region, CommandSender sender) {
         StageData stageData = getStage(name, sender);
         if (stageData != null) {
-            net.kigawa.escapeplugin.util.plugin.all.world.Region region1 = new net.kigawa.escapeplugin.util.plugin.all.world.Region(region);
+            PlayerRegion region1 = new PlayerRegion(region);
             stageData.setStageLoc(region1.getCoordinate());
             stageData.setStageWorld(region1.getWorld());
         }

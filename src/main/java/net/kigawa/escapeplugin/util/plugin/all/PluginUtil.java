@@ -25,7 +25,7 @@ public class PluginUtil {
         return world;
     }
 
-    public static Player isPlayer(CommandSender sender) {
+    public static Player getPlayer(CommandSender sender) {
         if (sender instanceof Player) {
             return (Player) sender;
         } else {
