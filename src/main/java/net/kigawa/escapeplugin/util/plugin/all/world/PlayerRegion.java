@@ -13,20 +13,37 @@ public class PlayerRegion {
     double cX;
     double cY;
     double cZ;
+    double width;
+    double height;
+    double length;
     String world;
+
+    public PlayerRegion(String world,double centerX,double centerY,double centerZ,double width,double height,double length){
+        this.world=world;
+        this.cX=centerX;
+        this.cY=centerY;
+        this.cZ=centerZ;
+        this.width=width;
+        this.height=height;
+        this.length=length;
+        organizeEnds();
+    }
 
     public PlayerRegion(com.sk89q.worldedit.regions.Region region) {
         world = region.getWorld().getName();
         cX = region.getCenter().getX();
         cY = region.getCenter().getY();
         cZ = region.getCenter().getY();
+        organizeEnds();
+    }
 
-        sX = (int) ((cX) - (region.getWidth() / 2));
-        sY = (int) ((cY) - (region.getHeight() / 2));
-        sZ = (int) ((cZ) - (region.getLength() / 2));
-        eX = (int) ((cX) + (region.getWidth() / 2));
-        eY = (int) ((cY) + (region.getHeight() / 2));
-        eZ = (int) ((cZ) + (region.getLength() / 2));
+    public  void organizeEnds(){
+        sX = (int) ((cX) - (width / 2));
+        sY = (int) ((cY) - (height / 2));
+        sZ = (int) ((cZ) - (length / 2));
+        eX = (int) ((cX) + (width / 2));
+        eY = (int) ((cY) + (height / 2));
+        eZ = (int) ((cZ) + (length / 2));
         if (sX < 0) sX--;
         if (sY < 0) sY--;
         if (sZ < 0) sZ--;
@@ -53,6 +70,18 @@ public class PlayerRegion {
             }
         }
         return false;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public double getHeight() {
+        return height;
     }
 
     public double getcZ() {

@@ -13,15 +13,17 @@ public class Gate {
     private GateData data;
     private EscapePlugin plugin;
 
-    public Gate(EscapePlugin plugin,GateData data) {
+    public Gate(EscapePlugin plugin,GateData data,PlayerRegion region) {
         this.plugin = plugin;
         this.data=data;
+        this.region=region;
+
+
         List<String> playerName=data.getPlayers();
         if (playerName==null){
             playerName=new ArrayList<>();
-            save();
         }
-
+        save();
     }
 
     public boolean contain(Player player) {
@@ -57,6 +59,7 @@ public class Gate {
     }
 
     public void save(){
+        data.setRegion(region);
         plugin.getRecorder().save(data,"gate");
     }
 

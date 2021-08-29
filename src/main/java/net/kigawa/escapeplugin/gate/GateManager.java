@@ -1,7 +1,10 @@
 package net.kigawa.escapeplugin.gate;
 
+import com.sk89q.worldedit.regions.Region;
 import net.kigawa.escapeplugin.EscapePlugin;
 import net.kigawa.escapeplugin.util.plugin.all.message.sender.InfoSender;
+import net.kigawa.escapeplugin.util.plugin.all.world.PlayerRegion;
+import net.kigawa.escapeplugin.util.plugin.worldedit.WorldEditUtil;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -62,6 +65,24 @@ public class GateManager {
             gate.resetAllowed();
         }
         return "reset allowed";
+    }
+
+    public String create(String gateName,Player player) {
+        if (contain(gateName)) {
+            GateData data = new GateData();
+            data.setName(gateName);
+            gates.add(new Gate(plugin,data, new PlayerRegion(WorldEditUtil.getRegion(player))));
+        }
+        return "gate is exit";
+    }
+
+    public boolean contain(String gateName) {
+        for (Gate gate : gates) {
+            if (gate.getName().equals(gateName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Gate getGate(String gateName) {
