@@ -1,6 +1,7 @@
 package net.kigawa.escapeplugin;
 
 import net.kigawa.escapeplugin.command.EscapeCommand;
+import net.kigawa.escapeplugin.command.GateCommand;
 import net.kigawa.escapeplugin.game.EscapeManager;
 import net.kigawa.escapeplugin.gate.GateManager;
 import net.kigawa.escapeplugin.util.plugin.all.KigawaPlugin;
@@ -17,5 +18,6 @@ public final class EscapePlugin extends KigawaPlugin {
         GateManager gateManager = new GateManager(this);
         EscapeManager escapeManager = new EscapeManager(this, gateManager);
         addCommand(new EscapeCommand(this, escapeManager));
+        addCommand(new GateCommand(this,gateManager));
     }
 }
