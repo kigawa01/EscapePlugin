@@ -50,7 +50,7 @@ public class Gate {
 
     public String teleport(Player player) {
         if (players.contains(player.getName())) {
-            player.teleport(new Location(plugin.getServer().getWorld(data.getWorld()), region.getcX(), region.getsY() + 1, region.getcZ()));
+            player.teleport(new Location(plugin.getServer().getWorld(data.getWorld()), region.getcX(), region.getsY(), region.getcZ()));
             return "teleport " + getName();
         } else return "you can't teleport " + getName();
     }
