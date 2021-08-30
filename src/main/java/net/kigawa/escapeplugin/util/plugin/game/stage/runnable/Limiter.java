@@ -11,11 +11,11 @@ import java.util.List;
 public class Limiter extends BukkitRunnable {
     KigawaPlugin plugin;
     List<Player> players;
-    int[] stageLoc=new int[6];
+    double[] stageLoc=new double[6];
     public Limiter(KigawaPlugin kigawaPlugin, List<Player> players, StageData stageData){
         plugin=kigawaPlugin;
         this.players=players;
-        int[] s=stageData.getStageLoc();
+        double[] s=stageData.getStageLoc();
         if (s[0]>s[3]){
             stageLoc[0]=s[3];
             stageLoc[3]=s[0];

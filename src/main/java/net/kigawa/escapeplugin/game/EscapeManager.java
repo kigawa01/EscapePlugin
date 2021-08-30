@@ -67,6 +67,13 @@ public class EscapeManager {
         }
     }
 
+    public String setCommandDoor(String gameName,int[] door){
+        EscapeGame game=getGame(gameName);
+        if (game!=null){
+            return game.setCommandDoor(door);
+        }return "game is not exit";
+    }
+
     public String setWorld(String gameName,String world){
         EscapeGame game=getGame(gameName);
         if (game!=null){

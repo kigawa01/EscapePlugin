@@ -3,50 +3,35 @@ package net.kigawa.escapeplugin.util.plugin.all.world;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class PlayerRegion {
-    int sX;
-    int sY;
-    int sZ;
-    int eX;
-    int eY;
-    int eZ;
-    double cX;
-    double cY;
-    double cZ;
-    double width;
-    double height;
-    double length;
-    String world;
+public class PlayerRegion extends Region {
+    private double sX;
+    private double sY;
+    private double sZ;
+    private double eX;
+    private double eY;
+    private double eZ;
+
 
     public PlayerRegion(String world, double centerX, double centerY, double centerZ, double width, double height, double length) {
-        this.world = world;
-        this.cX = centerX;
-        this.cY = centerY;
-        this.cZ = centerZ;
-        this.width = width;
-        this.height = height;
-        this.length = length;
-        organizeEnds();
+        super(world, centerX, centerY, centerZ, width, height, length);
     }
 
     public PlayerRegion(com.sk89q.worldedit.regions.Region region) {
-        world = region.getWorld().getName();
-        cX = region.getCenter().getX();
-        cY = region.getCenter().getY();
-        cZ = region.getCenter().getZ();
-        width = region.getWidth();
-        height = region.getHeight();
-        length = region.getLength();
-        organizeEnds();
+        super(region);
     }
 
+    public PlayerRegion(Player player) {
+        super(player);
+    }
+
+    @Override
     public void organizeEnds() {
-        sX = (int) ((cX) - (width / 2));
-        sY = (int) ((cY) - (height / 2));
-        sZ = (int) ((cZ) - (length / 2));
-        eX = (int) ((cX) + (width / 2));
-        eY = (int) ((cY) + (height / 2));
-        eZ = (int) ((cZ) + (length / 2));
+        sX = ((getcX()) - (getWidth() / 2));
+        sY = ((getcY()) - (getHeight() / 2));
+        sZ = ((getcZ()) - (getLength() / 2));
+        eX = ((getcX()) + (getWidth() / 2));
+        eY = ((getcY()) + (getHeight() / 2));
+        eZ = ((getcZ()) + (getLength() / 2));
 
         if (sX < 0) sX--;
         if (sY < 0) sY--;
@@ -64,12 +49,8 @@ public class PlayerRegion {
 
     }
 
-    public int[] getCoordinate() {
-        return new int[]{sX, sY, sZ, eX, eY, eZ};
-    }
-
-    public String getWorld() {
-        return world;
+    public double[] getCoordinates() {
+        return new double[]{ sX,  sY,  sZ,  eX,  eY,  eZ};
     }
 
     public boolean contain(Player player) {
@@ -84,51 +65,27 @@ public class PlayerRegion {
         return false;
     }
 
-    public double getWidth() {
-        return width;
-    }
-
-    public double getLength() {
-        return length;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public double getcZ() {
-        return cZ;
-    }
-
-    public double getcY() {
-        return cY;
-    }
-
-    public double getcX() {
-        return cX;
-    }
-
-    public int getsZ() {
+    public double getsZ() {
         return sZ;
     }
 
-    public int getsY() {
+    public double getsY() {
         return sY;
     }
 
-    public int getsX() {
+    public double getsX() {
         return sX;
     }
 
-    public int geteZ() {
+    public double geteZ() {
         return eZ;
     }
 
-    public int geteY() {
+    public double geteY() {
         return eY;
     }
 
-    public int geteX() {
+    public double geteX() {
         return eX;
     }
 }

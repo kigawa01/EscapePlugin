@@ -4,6 +4,10 @@ import net.kigawa.escapeplugin.util.plugin.all.recorder.RecorderData;
 
 public class StageData extends RecorderData {
 
+    int[] startLoc = new int[3];
+    double[] stageLoc = new double[6];
+    String stageWorld;
+
     public int[] getStartLoc() {
         return startLoc;
     }
@@ -12,18 +16,13 @@ public class StageData extends RecorderData {
         this.startLoc = startLoc;
     }
 
-    int[] startLoc = new int[3];
-
-    public int[] getStageLoc() {
+    public double[] getStageLoc() {
         return stageLoc;
     }
 
-    public void setStageLoc(int[] stageLoc) {
+    public void setStageLoc(double[] stageLoc) {
         this.stageLoc = stageLoc;
     }
-
-    int[] stageLoc = new int[6];
-    String stageWorld;
 
     public String getStageWorld() {
         return stageWorld;

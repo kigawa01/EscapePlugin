@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Hopper;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.inventory.Inventory;
@@ -17,15 +16,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class EscapeGame {
     public static final String ESCAPE = "escape";
-    private  List<ItemStack> keys = new ArrayList<>();
-    private static String[] keysStr=new String[]{
-            "","",""
+    private static String[] keysStr = new String[]{
+            "", "", ""
     };
     int count;
+    private List<ItemStack> keys = new ArrayList<>();
     private EscapeData data;
     private List<Player> join;
     private EscapePlugin plugin;
@@ -37,9 +35,9 @@ public class EscapeGame {
         this.plugin = escapePlugin;
         this.gateManager = gateManager;
 
-        for (String key:keysStr) {
+        for (String key : keysStr) {
             ItemStack itemStack = new ItemStack(Material.TRIPWIRE_HOOK);
-            ItemMeta itemMeta= itemStack.getItemMeta();
+            ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName(key);
             itemStack.setItemMeta(itemMeta);
             keys.add(itemStack);
@@ -50,6 +48,7 @@ public class EscapeGame {
 
     public String start() {
         if (!isStart) {
+            isStart = true;
             join = plugin.getServer().getWorld(data.getWorld()).getPlayers();
 
             count = 0;
@@ -83,6 +82,9 @@ public class EscapeGame {
 
     public String end() {
         gateManager.resetAllowed();
+        isStart = false;
+        join.clear();
+        keys.clear();
         return "";
     }
 
@@ -94,13 +96,13 @@ public class EscapeGame {
         plugin.getRecorder().save(data, ESCAPE);
     }
 
-    public void inventoryEvent(Inventory inventory){
-        if (inventory.getHolder() instanceof Hopper){
-            Hopper hopper=(Hopper) inventory.getHolder();
-            Block block=hopper.getBlock();
-            if (block.getX()==data.getHopper()[0]&&block.getY()==data.getHopper()[1]&&block.getZ()==data.getHopper()[2]){
-                for (ItemStack itemStack:keys){
-                    if (!inventory.contains(itemStack,1)){
+    public void inventoryEvent(Inventory inventory) {
+        if (inventory.getHolder() instanceof Hopper) {
+            Hopper hopper = (Hopper) inventory.getHolder();
+            Block block = hopper.getBlock();
+            if (block.getX() == data.getHopper()[0] && block.getY() == data.getHopper()[1] && block.getZ() == data.getHopper()[2]) {
+                for (ItemStack itemStack : keys) {
+                    if (!inventory.contains(itemStack, 1)) {
                         return;
                     }
                 }
@@ -109,16 +111,22 @@ public class EscapeGame {
         }
     }
 
-    public void closeEvent(InventoryCloseEvent event){
+    public void closeEvent(InventoryCloseEvent event) {
         inventoryEvent(event.getInventory());
     }
 
-    public void pickupEvent(InventoryPickupItemEvent event){
+    public void pickupEvent(InventoryPickupItemEvent event) {
         inventoryEvent(event.getInventory());
     }
 
-    public void openCommandRoom(){
+    public void openCommandRoom() {
 
+    }
+
+    public String setCommandDoor(int[] door){
+        data.setCommandDoor(door);
+        save();
+        return "set door";
     }
 
     public String setWorld(String world) {
@@ -127,7 +135,7 @@ public class EscapeGame {
         return "set world";
     }
 
-    public String setHopper(int[] loc){
+    public String setHopper(int[] loc) {
         data.setHopper(loc);
         save();
         return "set hopper loc";

@@ -1,5 +1,6 @@
 package net.kigawa.escapeplugin.command.escape;
 
+import net.kigawa.escapeplugin.command.escape.create.SetCommandDoor;
 import net.kigawa.escapeplugin.command.escape.create.SetHopper;
 import net.kigawa.escapeplugin.command.escape.create.SetWorld;
 import net.kigawa.escapeplugin.game.EscapeManager;
@@ -15,6 +16,7 @@ public class EscapeCreate extends EscapeCommandBase{
         addSubcommands(new net.kigawa.escapeplugin.command.escape.create.EscapeCreate(kigawaPlugin,manager));
         addSubcommands(new SetWorld(kigawaPlugin,manager));
         addSubcommands(new SetHopper(kigawaPlugin,manager));
+        addSubcommands(new SetCommandDoor(kigawaPlugin,manager));
     }
 
     @Override

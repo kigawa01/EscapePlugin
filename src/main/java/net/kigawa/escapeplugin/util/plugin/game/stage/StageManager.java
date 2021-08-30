@@ -57,7 +57,7 @@ public class StageManager {
         StageData stageData = getStage(name, sender);
         if (stageData != null) {
             stageData.setStageWorld(world);
-            int[] i = stageData.getStageLoc();
+            double[] i = stageData.getStageLoc();
             i[3] = x;
             i[4] = y;
             i[5] = z;
@@ -69,7 +69,7 @@ public class StageManager {
         StageData stageData = getStage(name, sender);
         if (stageData != null) {
             stageData.setStageWorld(world);
-            int[] i = stageData.getStageLoc();
+            double[] i = stageData.getStageLoc();
             i[0] = x;
             i[1] = y;
             i[2] = z;
@@ -81,7 +81,7 @@ public class StageManager {
         StageData stageData = getStage(name, sender);
         if (stageData != null) {
             PlayerRegion region1 = new PlayerRegion(region);
-            stageData.setStageLoc(region1.getCoordinate());
+            stageData.setStageLoc(region1.getCoordinates());
             stageData.setStageWorld(region1.getWorld());
         }
     }

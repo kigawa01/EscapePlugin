@@ -5,6 +5,15 @@ import net.kigawa.escapeplugin.util.plugin.all.recorder.RecorderData;
 public class EscapeData extends RecorderData {
     String world;
     int[] hopper;
+    int[] commandDoor;
+
+    public void setCommandDoor(int[] commandDoor) {
+        this.commandDoor = commandDoor;
+    }
+
+    public int[] getCommandDoor() {
+        return commandDoor;
+    }
 
     public int[] getHopper() {
         return hopper;
