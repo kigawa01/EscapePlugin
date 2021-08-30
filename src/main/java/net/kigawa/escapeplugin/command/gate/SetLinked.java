@@ -2,38 +2,33 @@ package net.kigawa.escapeplugin.command.gate;
 
 import net.kigawa.escapeplugin.gate.GateManager;
 import net.kigawa.escapeplugin.util.plugin.all.KigawaPlugin;
-import net.kigawa.escapeplugin.util.plugin.all.PluginUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class GateTeleport extends GateCommandBase{
-    public GateTeleport(KigawaPlugin kigawaPlugin, GateManager gate) {
+public class SetLinked extends GateCommandBase{
+    public SetLinked(KigawaPlugin kigawaPlugin, GateManager gate) {
         super(kigawaPlugin, gate);
     }
 
     @Override
     public String getName() {
-        return "tp";
+        return "setlinked";
     }
 
     @Override
     public boolean onThisCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (strings.length==2){
-            Player player= PluginUtil.getPlayer(commandSender);
-            if (player!=null) {
-                commandSender.sendMessage( getManager().teleport(strings[1],player));
-                return true;
-            }
+        if (strings.length==3){
+            commandSender.sendMessage(getManager().setLinked(strings[1],strings[2]));
+            return true;
         }
         return false;
     }
 
     @Override
     public String errorMessage() {
-        return "/gate tp <gate name>";
+        return "/gate setlinked <gate name> <linked>";
     }
 
     @Override

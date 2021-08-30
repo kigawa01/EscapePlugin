@@ -1,6 +1,7 @@
 package net.kigawa.escapeplugin.util.all;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Util {
@@ -17,5 +18,19 @@ public class Util {
             list1.add((T)o);
         }
         return list1;
+    }
+
+    public static String[] getStringArrangement(List<String> list){
+        String[] strings=new String[list.size()];
+        for (int i=0;i<list.size();i++){
+            strings[i]=list.get(i);
+        }
+        return strings;
+    }
+
+    public static<T> List<T> getList(T[] o){
+        List<T> list=new ArrayList<>();
+        Collections.addAll(list, o);
+        return list;
     }
 }

@@ -3,12 +3,19 @@ package net.kigawa.escapeplugin.gate;
 import net.kigawa.escapeplugin.util.plugin.all.recorder.RecorderData;
 import net.kigawa.escapeplugin.util.plugin.all.world.PlayerRegion;
 
-import java.util.List;
-
 public class GateData extends RecorderData {
     String world;
     double[] center;
     double[] size;
+    String[] linked;
+
+    public void setLinked(String[] linked) {
+        this.linked = linked;
+    }
+
+    public String[] getLinked() {
+        return linked;
+    }
 
     public String getWorld() {
         return world;

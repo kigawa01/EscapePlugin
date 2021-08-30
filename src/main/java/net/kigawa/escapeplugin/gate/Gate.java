@@ -1,6 +1,7 @@
 package net.kigawa.escapeplugin.gate;
 
 import net.kigawa.escapeplugin.EscapePlugin;
+import net.kigawa.escapeplugin.util.all.Util;
 import net.kigawa.escapeplugin.util.plugin.all.world.PlayerRegion;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -18,8 +19,9 @@ public class Gate {
         this.plugin = plugin;
         this.data = data;
         this.region = region;
+        players = new ArrayList<>();
 
-        plugin.logger("Gate "+region.getWidth());
+        plugin.logger("Gate " + region.getWidth());
 
         save();
 
@@ -48,7 +50,7 @@ public class Gate {
 
     public String teleport(Player player) {
         if (players.contains(player.getName())) {
-            player.teleport(new Location(plugin.getServer().getWorld(data.getWorld()), region.getcX(), region.getcY(), region.getcZ()));
+            player.teleport(new Location(plugin.getServer().getWorld(data.getWorld()), region.getcX(), region.getsY() + 1, region.getcZ()));
             return "teleport " + getName();
         } else return "you can't teleport " + getName();
     }
@@ -60,18 +62,32 @@ public class Gate {
     }
 
     public void addAllowed(String playerName) {
-        if (players.contains(playerName)) {
+        if (!players.contains(playerName)) {
             players.add(playerName);
             save();
         }
     }
 
     public void save() {
+        if (data.getLinked() == null) {
+            data.setLinked(new String[0]);
+        }
         data.setRegion(region);
         plugin.getRecorder().save(data, "gate");
     }
 
+    public String setLinked(String linked) {
+        List<String> linkedGates = Util.getList(data.getLinked());
+        linkedGates.add(linked);
+        data.setLinked(Util.getStringArrangement(linkedGates));
+        return "linked gate is set";
+    }
+
     public String getName() {
         return data.getName();
+    }
+
+    public String[] getLinked() {
+        return data.getLinked();
     }
 }

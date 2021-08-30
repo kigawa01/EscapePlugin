@@ -26,6 +26,7 @@ public class GateManager {
         for (GateData data : gateData) {
             gates.add(new Gate(plugin, data));
         }
+        wait=new ArrayList<>();
     }
 
     public void moveEvent(PlayerMoveEvent event) {
@@ -33,7 +34,7 @@ public class GateManager {
         boolean contain=false;
         for (Gate gate : gates) {
             if (gate.contain(player)) {
-                gate.addAllowed(player.getName());
+                addAllowed(gate,player);
                 contain=true;
                 if (!wait.contains(player)) {
                     sendGates(player);
@@ -42,8 +43,18 @@ public class GateManager {
                 }
             }
         }
-        if (contain){
+        if (!contain){
             wait.remove(player);
+        }
+    }
+
+    public void addAllowed(Gate gate,Player player){
+        gate.addAllowed(player.getName());
+        for (String linked:gate.getLinked()){
+            Gate gate1=getGate(linked);
+            if (gate1!=null){
+                addAllowed(gate1,player);
+            }
         }
     }
 
@@ -52,9 +63,9 @@ public class GateManager {
 
         for (Gate gate : gates) {
             if (gate.containAllowed(player.getName())) {
-                TextComponent textComponent = new TextComponent(gate.getName()+("クリックしてテレポート"));
+                TextComponent textComponent = new TextComponent(gate.getName()+("   (Click)"));
                 textComponent.setColor(ChatColor.BLUE);
-                textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/gate teleport " + gate.getName()));
+                textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/gate tp " + gate.getName()));
                 player.spigot().sendMessage(textComponent);
             }
         }
@@ -88,7 +99,7 @@ public class GateManager {
     }
 
     public boolean contain(String gateName) {
-        if (gates != null) {
+        if (gates == null) {
             gates = new ArrayList<>();
         }
         for (Gate gate : gates) {
@@ -97,6 +108,14 @@ public class GateManager {
             }
         }
         return false;
+    }
+
+    public String setLinked(String gateName,String linked){
+        Gate gate=getGate(gateName);
+        if (gate!=null){
+            return gate.setLinked(linked);
+        }
+        return gateName+" is not exit";
     }
 
     public Gate getGate(String gateName) {

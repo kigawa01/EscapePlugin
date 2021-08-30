@@ -4,6 +4,7 @@ import net.kigawa.escapeplugin.EscapePlugin;
 import net.kigawa.escapeplugin.command.gate.GateCreate;
 import net.kigawa.escapeplugin.command.gate.GateList;
 import net.kigawa.escapeplugin.command.gate.GateTeleport;
+import net.kigawa.escapeplugin.command.gate.SetLinked;
 import net.kigawa.escapeplugin.gate.GateManager;
 import net.kigawa.escapeplugin.util.plugin.all.PluginUtil;
 import net.kigawa.escapeplugin.util.plugin.all.command.FirstCommand;
@@ -24,6 +25,7 @@ public class GateCommand extends FirstCommand {
         addSubcommands(new GateCreate(plugin,manager));
         addSubcommands(new GateList(plugin,manager));
         addSubcommands(new GateTeleport(plugin,manager));
+        addSubcommands(new SetLinked(plugin,manager));
     }
 
     @Override

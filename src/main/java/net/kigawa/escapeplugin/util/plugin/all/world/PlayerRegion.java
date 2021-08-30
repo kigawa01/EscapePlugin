@@ -47,12 +47,21 @@ public class PlayerRegion {
         eX = (int) ((cX) + (width / 2));
         eY = (int) ((cY) + (height / 2));
         eZ = (int) ((cZ) + (length / 2));
+
         if (sX < 0) sX--;
         if (sY < 0) sY--;
         if (sZ < 0) sZ--;
+        if (sX >= 0) sX++;
+        if (sY >= 0) sY++;
+        if (sZ >= 0) sZ++;
+
+        if (eX < 0) eX--;
+        if (eY < 0) eY--;
+        if (eZ < 0) eZ--;
         if (eX >= 0) eX++;
         if (eY >= 0) eY++;
         if (eZ >= 0) eZ++;
+
     }
 
     public int[] getCoordinate() {
