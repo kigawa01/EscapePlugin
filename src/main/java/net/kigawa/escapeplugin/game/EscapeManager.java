@@ -2,6 +2,8 @@ package net.kigawa.escapeplugin.game;
 
 import net.kigawa.escapeplugin.EscapePlugin;
 import net.kigawa.escapeplugin.gate.GateManager;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryPickupItemEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,18 @@ public class EscapeManager {
         }
     }
 
+    public void closeEvent(InventoryCloseEvent event){
+        for (EscapeGame game:games){
+            game.closeEvent(event);
+        }
+    }
+
+    public void pickupEvent(InventoryPickupItemEvent event){
+        for (EscapeGame game:games){
+            game.pickupEvent(event);
+        }
+    }
+
     public String setWorld(String gameName,String world){
         EscapeGame game=getGame(gameName);
         if (game!=null){
@@ -60,6 +74,14 @@ public class EscapeManager {
         }else {
             return "game is not exit";
         }
+    }
+
+    public String setHopper(String gameName,int[] loc){
+        EscapeGame game=getGame(gameName);
+        if (game!=null){
+            return game.setHopper(loc);
+        }
+        return "game is not exit";
     }
 
     public EscapeGame getGame(String name){

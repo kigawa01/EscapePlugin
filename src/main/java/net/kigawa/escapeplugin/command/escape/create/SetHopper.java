@@ -1,7 +1,5 @@
-package net.kigawa.escapeplugin.command.escape;
+package net.kigawa.escapeplugin.command.escape.create;
 
-import net.kigawa.escapeplugin.command.escape.create.SetHopper;
-import net.kigawa.escapeplugin.command.escape.create.SetWorld;
 import net.kigawa.escapeplugin.game.EscapeManager;
 import net.kigawa.escapeplugin.util.plugin.all.KigawaPlugin;
 import org.bukkit.command.Command;
@@ -9,27 +7,30 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
-public class EscapeCreate extends EscapeCommandBase{
-    public EscapeCreate(KigawaPlugin kigawaPlugin, EscapeManager manager) {
+public class SetHopper extends CreateCommandBase{
+    public SetHopper(KigawaPlugin kigawaPlugin, EscapeManager manager) {
         super(kigawaPlugin, manager);
-        addSubcommands(new net.kigawa.escapeplugin.command.escape.create.EscapeCreate(kigawaPlugin,manager));
-        addSubcommands(new SetWorld(kigawaPlugin,manager));
-        addSubcommands(new SetHopper(kigawaPlugin,manager));
     }
 
     @Override
     public String getName() {
-        return "create";
+        return "sethopper";
     }
 
     @Override
     public boolean onThisCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        if (strings.length==6){
+            commandSender.sendMessage(getManager().setHopper(strings[2],new int[]{
+                    Integer.valueOf(strings[3]),Integer.valueOf(strings[4]),Integer.valueOf(strings[5])
+            }));
+            return true;
+        }
         return false;
     }
 
     @Override
     public String errorMessage() {
-        return "/escape create ";
+        return "/escape create <set hopper> <game name> <x> <y> <z>";
     }
 
     @Override
