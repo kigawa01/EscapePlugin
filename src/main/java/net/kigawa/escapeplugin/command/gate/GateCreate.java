@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class GateCreate extends GateCommandBase{
+public class GateCreate extends GateCommandBase {
     public GateCreate(KigawaPlugin kigawaPlugin, GateManager gate) {
         super(kigawaPlugin, gate);
     }
@@ -21,9 +21,12 @@ public class GateCreate extends GateCommandBase{
 
     @Override
     public boolean onThisCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        Player player= PluginUtil.getPlayer(commandSender);
-        if (player!=null) {
-            getManager().create(strings[1],player);
+        if (strings.length == 2) {
+            Player player = PluginUtil.getPlayer(commandSender);
+            if (player != null) {
+                commandSender.sendMessage(getManager().create(strings[1], player));
+            }
+            return true;
         }
         return false;
     }

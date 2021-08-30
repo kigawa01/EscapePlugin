@@ -30,9 +30,11 @@ public class GateManager {
 
     public void moveEvent(PlayerMoveEvent event) {
         Player player = event.getPlayer();
+        boolean contain=false;
         for (Gate gate : gates) {
             if (gate.contain(player)) {
-                gate.addAllowed(plugin.getName());
+                gate.addAllowed(player.getName());
+                contain=true;
                 if (!wait.contains(player)) {
                     sendGates(player);
                     wait.add(player);
@@ -40,7 +42,9 @@ public class GateManager {
                 }
             }
         }
-        wait.remove(player);
+        if (contain){
+            wait.remove(player);
+        }
     }
 
     public String sendGates(Player player) {
@@ -48,7 +52,7 @@ public class GateManager {
 
         for (Gate gate : gates) {
             if (gate.containAllowed(player.getName())) {
-                TextComponent textComponent = new TextComponent(gate.getName());
+                TextComponent textComponent = new TextComponent(gate.getName()+("クリックしてテレポート"));
                 textComponent.setColor(ChatColor.BLUE);
                 textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/gate teleport " + gate.getName()));
                 player.spigot().sendMessage(textComponent);
@@ -74,10 +78,11 @@ public class GateManager {
     }
 
     public String create(String gateName, Player player) {
-        if (contain(gateName)) {
+        if (!contain(gateName)) {
             GateData data = new GateData();
             data.setName(gateName);
             gates.add(new Gate(plugin, data, new PlayerRegion(WorldEditUtil.getRegion(player))));
+            return "gate is set";
         }
         return "gate is exit";
     }

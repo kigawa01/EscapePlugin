@@ -3,6 +3,8 @@ version: ${project.version}
 main: net.kigawa.escapeplugin.EscapePlugin
 api-version: 1.16
 authors: [ kigawa ]
+softdepend:
+  - WorldEdit
 commands:
   escape:
     usage: /game <sub command>

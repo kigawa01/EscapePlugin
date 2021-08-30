@@ -18,14 +18,14 @@ public class PlayerRegion {
     double length;
     String world;
 
-    public PlayerRegion(String world,double centerX,double centerY,double centerZ,double width,double height,double length){
-        this.world=world;
-        this.cX=centerX;
-        this.cY=centerY;
-        this.cZ=centerZ;
-        this.width=width;
-        this.height=height;
-        this.length=length;
+    public PlayerRegion(String world, double centerX, double centerY, double centerZ, double width, double height, double length) {
+        this.world = world;
+        this.cX = centerX;
+        this.cY = centerY;
+        this.cZ = centerZ;
+        this.width = width;
+        this.height = height;
+        this.length = length;
         organizeEnds();
     }
 
@@ -33,11 +33,14 @@ public class PlayerRegion {
         world = region.getWorld().getName();
         cX = region.getCenter().getX();
         cY = region.getCenter().getY();
-        cZ = region.getCenter().getY();
+        cZ = region.getCenter().getZ();
+        width = region.getWidth();
+        height = region.getHeight();
+        length = region.getLength();
         organizeEnds();
     }
 
-    public  void organizeEnds(){
+    public void organizeEnds() {
         sX = (int) ((cX) - (width / 2));
         sY = (int) ((cY) - (height / 2));
         sZ = (int) ((cZ) - (length / 2));

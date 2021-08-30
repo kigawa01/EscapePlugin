@@ -7,7 +7,6 @@ import java.util.List;
 
 public class GateData extends RecorderData {
     String world;
-    List<String> players;
     double[] center;
     double[] size;
 
@@ -43,13 +42,5 @@ public class GateData extends RecorderData {
 
     public double[] getCenter() {
         return center;
-    }
-
-    public List<String> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<String> players) {
-        this.players = players;
     }
 }
