@@ -13,15 +13,27 @@ public class Gate {
     private GateData data;
     private EscapePlugin plugin;
 
-    public Gate(EscapePlugin plugin,GateData data,PlayerRegion region) {
+    public Gate(EscapePlugin plugin, GateData data, PlayerRegion region) {
         this.plugin = plugin;
-        this.data=data;
-        this.region=region;
+        this.data = data;
+        this.region = region;
 
+        setup();
 
-        List<String> playerName=data.getPlayers();
-        if (playerName==null){
-            playerName=new ArrayList<>();
+    }
+
+    public Gate(EscapePlugin plugin, GateData data) {
+        this.plugin = plugin;
+        this.data = data;
+        this.region = new PlayerRegion(data.getWorld(), data.getCenter()[0], data.getCenter()[1], data.getCenter()[2], data.getSize()[0], data.getSize()[1], data.getSize()[2]);
+
+        setup();
+    }
+
+    public void setup() {
+        List<String> playerName = data.getPlayers();
+        if (playerName == null) {
+            playerName = new ArrayList<>();
         }
         save();
     }
@@ -45,22 +57,22 @@ public class Gate {
         } else return "you can't teleport " + getName();
     }
 
-    public String resetAllowed(){
+    public String resetAllowed() {
         data.getPlayers().clear();
         save();
         return "clear allowed";
     }
 
-    public void addAllowed(String playerName){
+    public void addAllowed(String playerName) {
         if (data.getPlayers().contains(playerName)) {
             data.getPlayers().add(playerName);
             save();
         }
     }
 
-    public void save(){
+    public void save() {
         data.setRegion(region);
-        plugin.getRecorder().save(data,"gate");
+        plugin.getRecorder().save(data, "gate");
     }
 
     public String getName() {

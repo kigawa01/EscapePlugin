@@ -29,6 +29,22 @@ public class GateData extends RecorderData {
         };
     }
 
+    public void setSize(double[] size) {
+        this.size = size;
+    }
+
+    public void setCenter(double[] center) {
+        this.center = center;
+    }
+
+    public double[] getSize() {
+        return size;
+    }
+
+    public double[] getCenter() {
+        return center;
+    }
+
     public List<String> getPlayers() {
         return players;
     }

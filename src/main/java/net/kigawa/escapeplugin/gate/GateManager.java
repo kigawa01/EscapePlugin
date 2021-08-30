@@ -1,6 +1,5 @@
 package net.kigawa.escapeplugin.gate;
 
-import com.sk89q.worldedit.regions.Region;
 import net.kigawa.escapeplugin.EscapePlugin;
 import net.kigawa.escapeplugin.util.plugin.all.message.sender.InfoSender;
 import net.kigawa.escapeplugin.util.plugin.all.world.PlayerRegion;
@@ -11,6 +10,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GateManager {
@@ -20,6 +20,12 @@ public class GateManager {
 
     public GateManager(EscapePlugin plugin) {
         this.plugin = plugin;
+        List<GateData> gateData;
+        gateData = plugin.getRecorder().loadAll(GateData.class, "gate");
+        gates = new ArrayList<>();
+        for (GateData data : gateData) {
+            gates.add(new Gate(plugin, data));
+        }
     }
 
     public void moveEvent(PlayerMoveEvent event) {
@@ -67,16 +73,19 @@ public class GateManager {
         return "reset allowed";
     }
 
-    public String create(String gateName,Player player) {
+    public String create(String gateName, Player player) {
         if (contain(gateName)) {
             GateData data = new GateData();
             data.setName(gateName);
-            gates.add(new Gate(plugin,data, new PlayerRegion(WorldEditUtil.getRegion(player))));
+            gates.add(new Gate(plugin, data, new PlayerRegion(WorldEditUtil.getRegion(player))));
         }
         return "gate is exit";
     }
 
     public boolean contain(String gateName) {
+        if (gates != null) {
+            gates = new ArrayList<>();
+        }
         for (Gate gate : gates) {
             if (gate.getName().equals(gateName)) {
                 return true;
