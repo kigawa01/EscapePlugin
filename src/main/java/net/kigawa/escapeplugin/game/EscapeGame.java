@@ -109,7 +109,7 @@ public class EscapeGame {
 
     public void interactEvent(PlayerInteractEvent event) {
         plugin.logger("interact event");
-        if (event.getClickedBlock() instanceof CommandBlock) {
+        if (event.getClickedBlock().getType().equals(Material.COMMAND_BLOCK)) {
             plugin.logger("if (event.getClickedBlock() instanceof CommandBlock) ");
             if (isStart) {
                 count = 0;
