@@ -165,7 +165,7 @@ public class EscapeGame {
                                 sendMessage(ChatColor.BLUE + "「そこそこのボリュームになったから折角だし、みんなに遊んで貰おうかなって思って」");
                                 break;
                             case 11:
-                                sendMessage(ChatColor.GOLD + "……ってことは、今までのことは全部、嘘？");
+                                sendMessage(ChatColor.GOLD + "「……ってことは、今までのことは全部、嘘？」");
                                 break;
                             case 12:
                                 sendMessage(ChatColor.BLUE + "「そうなるね」");
