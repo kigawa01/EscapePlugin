@@ -89,11 +89,10 @@ public class EscapeGame {
     }
 
     public String end() {
-        gateManager.resetAllowed();
-        isStart = false;
-        join.clear();
-        keys.clear();
-        isSend=false;
+        Location spawn=plugin.getServer().getWorld(data.getWorld()).getSpawnLocation();
+        for (Player player : join) {
+            player.teleport(spawn);
+        }
 
         Location door = new Location(plugin.getServer().getWorld(data.getWorld()), data.getCommandDoor()[0], data.getCommandDoor()[1], data.getCommandDoor()[2]);
         Block block = door.getBlock();
@@ -106,14 +105,16 @@ public class EscapeGame {
             hopper.getInventory().clear();
         }
 
-        Location spawn=plugin.getServer().getWorld(data.getWorld()).getSpawnLocation();
-        for (Player player : join) {
-            player.teleport(spawn);
-        }
+        gateManager.resetAllowed();
+        isStart = false;
+        join.clear();
+        keys.clear();
+        isSend=false;
         return "";
     }
 
     public void sendMessage(String message) {
+        new InfoSender("",join);
         new InfoSender(message, join);
     }
 
