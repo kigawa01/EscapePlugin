@@ -98,6 +98,12 @@ public class EscapeGame {
         Block block = door.getBlock();
         block.setType(Material.SMOOTH_STONE);
         block.getRelative(BlockFace.UP).setType(Material.SMOOTH_STONE);
+
+        Block block1= new Location(plugin.getServer().getWorld(data.getWorld()),data.getHopper()[0],data.getHopper()[1], data.getHopper()[2] ).getBlock();
+        if (block1 instanceof Hopper){
+            Hopper hopper=(Hopper) block1;
+            hopper.getInventory().clear();
+        }
         return "";
     }
 
