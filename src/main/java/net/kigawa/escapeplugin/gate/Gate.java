@@ -30,7 +30,7 @@ public class Gate {
     public Gate(EscapePlugin plugin, GateData data) {
         this.plugin = plugin;
         this.data = data;
-        this.region = new PlayerRegion(data.getWorld(), data.getCenter()[0]+0.5, data.getCenter()[1]+0.5, data.getCenter()[2]+0.5, data.getSize()[0], data.getSize()[1], data.getSize()[2]);
+        this.region = new PlayerRegion(data.getWorld(), data.getCenter()[0], data.getCenter()[1], data.getCenter()[2], data.getSize()[0], data.getSize()[1], data.getSize()[2]);
         players = new ArrayList<>();
 
         save();
