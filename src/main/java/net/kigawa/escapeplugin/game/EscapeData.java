@@ -7,12 +7,12 @@ public class EscapeData extends RecorderData {
     int[] hopper;
     int[] commandDoor;
 
-    public void setCommandDoor(int[] commandDoor) {
-        this.commandDoor = commandDoor;
-    }
-
     public int[] getCommandDoor() {
         return commandDoor;
+    }
+
+    public void setCommandDoor(int[] commandDoor) {
+        this.commandDoor = commandDoor;
     }
 
     public int[] getHopper() {

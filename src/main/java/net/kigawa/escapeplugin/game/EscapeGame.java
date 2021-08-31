@@ -9,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.CommandBlock;
 import org.bukkit.block.Hopper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -36,6 +35,7 @@ public class EscapeGame {
     private EscapePlugin plugin;
     private GateManager gateManager;
     private boolean isStart;
+    private boolean isSend;
 
     public EscapeGame(EscapePlugin escapePlugin, EscapeData escapeData, GateManager gateManager) {
         data = escapeData;
@@ -93,16 +93,22 @@ public class EscapeGame {
         isStart = false;
         join.clear();
         keys.clear();
+        isSend=false;
 
         Location door = new Location(plugin.getServer().getWorld(data.getWorld()), data.getCommandDoor()[0], data.getCommandDoor()[1], data.getCommandDoor()[2]);
         Block block = door.getBlock();
         block.setType(Material.SMOOTH_STONE);
         block.getRelative(BlockFace.UP).setType(Material.SMOOTH_STONE);
 
-        Block block1= new Location(plugin.getServer().getWorld(data.getWorld()),data.getHopper()[0],data.getHopper()[1], data.getHopper()[2] ).getBlock();
-        if (block1.getState() instanceof Hopper){
-            Hopper hopper=(Hopper) block1.getState();
+        Block block1 = new Location(plugin.getServer().getWorld(data.getWorld()), data.getHopper()[0], data.getHopper()[1], data.getHopper()[2]).getBlock();
+        if (block1.getState() instanceof Hopper) {
+            Hopper hopper = (Hopper) block1.getState();
             hopper.getInventory().clear();
+        }
+
+        Location spawn=plugin.getServer().getWorld(data.getWorld()).getSpawnLocation();
+        for (Player player : join) {
+            player.teleport(spawn);
         }
         return "";
     }
@@ -117,10 +123,11 @@ public class EscapeGame {
 
     public void interactEvent(PlayerInteractEvent event) {
         plugin.logger("interact event");
-        if (event.getClickedBlock()!=null&&event.getClickedBlock().getType().equals(Material.COMMAND_BLOCK)) {
+        if (event.getClickedBlock() != null && event.getClickedBlock().getType().equals(Material.COMMAND_BLOCK)) {
             plugin.logger("if (event.getClickedBlock() instanceof CommandBlock) ");
-            if (isStart) {
+            if (isStart&&!isSend) {
                 count1 = 0;
+                isSend=true;
                 new BukkitRunnable() {
                     @Override
                     public void run() {
@@ -185,7 +192,7 @@ public class EscapeGame {
 
     public void inventoryEvent(Inventory inventory) {
         plugin.logger("inventory event");
-        if (inventory.getHolder() instanceof Hopper&&isStart) {
+        if (inventory.getHolder() instanceof Hopper && isStart) {
             plugin.logger("if (inventory.getHolder() instanceof Hopper)");
             Hopper hopper = (Hopper) inventory.getHolder();
             Block block = hopper.getBlock();
@@ -193,7 +200,7 @@ public class EscapeGame {
                 plugin.logger("if (block.getX() == data.getHopper()[0] && block.getY() == data.getHopper()[1] && block.getZ() == data.getHopper()[2]) {");
                 for (String name : keysStr) {
                     plugin.logger(name);
-                    if (!PluginUtil.containInInventory(inventory,name,Material.TRIPWIRE_HOOK)) {
+                    if (!PluginUtil.containInInventory(inventory, name, Material.TRIPWIRE_HOOK)) {
                         plugin.logger("if (!inventory.contains(itemStack, 1)) {");
                         return;
                     }
