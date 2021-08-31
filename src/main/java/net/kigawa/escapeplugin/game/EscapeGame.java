@@ -29,6 +29,7 @@ public class EscapeGame {
             "謎のカギ", "迷路のカギ", "アスレのカギ"
     };
     int count;
+    int count1;
     private List<ItemStack> keys = new ArrayList<>();
     private EscapeData data;
     private List<Player> join;
@@ -77,6 +78,7 @@ public class EscapeGame {
                             break;
                         case 5:
                             sendMessage("小川は、「存在をバレてから、犯人に見つからないようにヒントを残してきた。」とも言っていた。まずはヒントを探すところから始めよう。");
+                            cancel();
                     }
                 }
             }.runTaskTimer(plugin, 10, 50);
@@ -109,15 +111,15 @@ public class EscapeGame {
 
     public void interactEvent(PlayerInteractEvent event) {
         plugin.logger("interact event");
-        if (event.getClickedBlock().getType().equals(Material.COMMAND_BLOCK)) {
+        if (event.getClickedBlock()!=null&&event.getClickedBlock().getType().equals(Material.COMMAND_BLOCK)) {
             plugin.logger("if (event.getClickedBlock() instanceof CommandBlock) ");
             if (isStart) {
-                count = 0;
+                count1 = 0;
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        count++;
-                        switch (count) {
+                        count1++;
+                        switch (count1) {
                             case 1:
                                 sendMessage("犯人を捕まえBANする為に、僕達は犯人の仕掛けた謎をクリアしてきた。");
                                 break;
@@ -132,29 +134,41 @@ public class EscapeGame {
                                 break;
                             case 5:
                                 sendMessage("僕達が困惑していると、向こうから話しかけてきた。");
+                                break;
                             case 6:
                                 sendMessage(ChatColor.BLUE + "「ここは僕が作ったみんなにゲームをしてもらう為のサーバだよ」");
+                                break;
                             case 7:
                                 sendMessage("理解が追いつかない。");
+                                break;
                             case 8:
                                 sendMessage("しかし、こちらの事など意にも介さず、小川は話を続ける。");
+                                break;
                             case 9:
                                 sendMessage(ChatColor.BLUE + "「寂しかったからノリで作ってたら途中から熱が入って....」");
+                                break;
                             case 10:
                                 sendMessage(ChatColor.BLUE + "「そこそこのボリュームになったから折角だし、みんなに遊んで貰おうかなって思って」");
+                                break;
                             case 11:
                                 sendMessage(ChatColor.GOLD + "……ってことは、今までのことは全部、嘘？");
+                                break;
                             case 12:
                                 sendMessage(ChatColor.BLUE + "「そうなるね」");
+                                break;
                             case 13:
                                 sendMessage(ChatColor.BLUE + "「みんなクラスサーバーに全然来てくれないから、何かきっかけがあればいいかなって」");
+                                break;
                             case 14:
                                 sendMessage(".......");
+                                break;
                             case 15:
                                 sendMessage("....");
+                                break;
                             case 16:
                                 sendMessage("..");
                                 end();
+                                cancel();
                         }
                     }
                 }.runTaskTimer(plugin, 10, 50);
