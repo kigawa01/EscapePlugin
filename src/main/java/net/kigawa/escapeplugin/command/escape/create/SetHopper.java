@@ -24,7 +24,7 @@ public class SetHopper extends CreateCommandBase{
 
     @Override
     public boolean onThisCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (strings.length==6&&commandSender instanceof Player){
+        if (strings.length==3&&commandSender instanceof Player){
             Region region= WorldEditUtil.getRegion(PluginUtil.getPlayer(commandSender));
             commandSender.sendMessage(getManager().setHopper(strings[2],new BlockRegion(region).getIntCenter()));
             return true;
@@ -34,7 +34,7 @@ public class SetHopper extends CreateCommandBase{
 
     @Override
     public String errorMessage() {
-        return "/escape create <set hopper> <game name> <x> <y> <z>";
+        return "/escape create <set hopper> <game name>";
     }
 
     @Override
