@@ -5,6 +5,7 @@ import net.kigawa.escapeplugin.util.plugin.all.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 public class EscapeListener extends Event {
     EscapeManager manager;
@@ -22,5 +23,10 @@ public class EscapeListener extends Event {
     @EventHandler
     public void pickupEvent(InventoryPickupItemEvent event) {
         manager.pickupEvent(event);
+    }
+
+    @EventHandler
+    public void interactEvent(PlayerInteractEvent event){
+        manager.interactEvent(event);
     }
 }

@@ -4,6 +4,7 @@ import net.kigawa.escapeplugin.EscapePlugin;
 import net.kigawa.escapeplugin.gate.GateManager;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,14 @@ public class EscapeManager {
         }
     }
 
+    public void interactEvent(PlayerInteractEvent event){
+        for (EscapeGame game:games){
+            game.interactEvent(event);
+        }
+    }
+
     public void closeEvent(InventoryCloseEvent event){
+        plugin.logger("manager close event");
         for (EscapeGame game:games){
             game.closeEvent(event);
         }

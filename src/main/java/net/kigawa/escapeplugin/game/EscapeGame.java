@@ -2,6 +2,7 @@ package net.kigawa.escapeplugin.game;
 
 import net.kigawa.escapeplugin.EscapePlugin;
 import net.kigawa.escapeplugin.gate.GateManager;
+import net.kigawa.escapeplugin.util.plugin.all.PluginUtil;
 import net.kigawa.escapeplugin.util.plugin.all.message.sender.InfoSender;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -25,7 +26,7 @@ import java.util.List;
 public class EscapeGame {
     public static final String ESCAPE = "escape";
     private static String[] keysStr = new String[]{
-            "謎の鍵", "迷路のカギ", "アスレのカギ"
+            "謎のカギ", "迷路のカギ", "アスレのカギ"
     };
     int count;
     private List<ItemStack> keys = new ArrayList<>();
@@ -161,12 +162,17 @@ public class EscapeGame {
     }
 
     public void inventoryEvent(Inventory inventory) {
-        if (inventory.getHolder() instanceof Hopper) {
+        plugin.logger("inventory event");
+        if (inventory.getHolder() instanceof Hopper&&isStart) {
+            plugin.logger("if (inventory.getHolder() instanceof Hopper)");
             Hopper hopper = (Hopper) inventory.getHolder();
             Block block = hopper.getBlock();
             if (block.getX() == data.getHopper()[0] && block.getY() == data.getHopper()[1] && block.getZ() == data.getHopper()[2]) {
-                for (ItemStack itemStack : keys) {
-                    if (!inventory.contains(itemStack, 1)) {
+                plugin.logger("if (block.getX() == data.getHopper()[0] && block.getY() == data.getHopper()[1] && block.getZ() == data.getHopper()[2]) {");
+                for (String name : keysStr) {
+                    plugin.logger(name);
+                    if (!PluginUtil.containInInventory(inventory,name,Material.TRIPWIRE_HOOK)) {
+                        plugin.logger("if (!inventory.contains(itemStack, 1)) {");
                         return;
                     }
                 }
