@@ -51,11 +51,13 @@ public class PluginUtil {
         }
     }
 
-    public static  boolean containInInventory(Inventory inventory, String displayName, Material material){
-        ItemStack[] itemStacks= inventory.getContents();
-        for (ItemStack itemStack:itemStacks){
-            if (itemStack.getType().equals(material)&&itemStack.getItemMeta().getDisplayName().equals(displayName)){
-                return true;
+    public static boolean containInInventory(Inventory inventory, String displayName, Material material) {
+        ItemStack[] itemStacks = inventory.getContents();
+        if (itemStacks != null) {
+            for (ItemStack itemStack : itemStacks) {
+                if (itemStack != null && itemStack.getType().equals(material) && itemStack.getItemMeta().getDisplayName().equals(displayName)) {
+                    return true;
+                }
             }
         }
         return false;

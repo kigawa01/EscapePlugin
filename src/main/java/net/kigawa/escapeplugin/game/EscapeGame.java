@@ -100,8 +100,8 @@ public class EscapeGame {
         block.getRelative(BlockFace.UP).setType(Material.SMOOTH_STONE);
 
         Block block1= new Location(plugin.getServer().getWorld(data.getWorld()),data.getHopper()[0],data.getHopper()[1], data.getHopper()[2] ).getBlock();
-        if (block1 instanceof Hopper){
-            Hopper hopper=(Hopper) block1;
+        if (block1.getState() instanceof Hopper){
+            Hopper hopper=(Hopper) block1.getState();
             hopper.getInventory().clear();
         }
         return "";
