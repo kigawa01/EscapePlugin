@@ -30,6 +30,14 @@ public class BlockRegion extends Region {
         eX = (int) ((getcX()) + (getWidth() / 2));
         eY = (int) ((getcY()) + (getHeight() / 2));
         eZ = (int) ((getcZ()) + (getLength() / 2));
+
+        if (sX < 0) sX--;
+        if (sY < 0) sY--;
+        if (sZ < 0) sZ--;
+
+        if (eX >= 0) eX++;
+        if (eY >= 0) eY++;
+        if (eZ >= 0) eZ++;
     }
 
     public int[] getCoordinates(){
