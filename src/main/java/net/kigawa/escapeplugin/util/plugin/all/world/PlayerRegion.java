@@ -1,5 +1,6 @@
 package net.kigawa.escapeplugin.util.plugin.all.world;
 
+import net.kigawa.escapeplugin.util.plugin.worldedit.WorldEditUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -17,11 +18,11 @@ public class PlayerRegion extends Region {
     }
 
     public PlayerRegion(com.sk89q.worldedit.regions.Region region) {
-        super(region);
+        this(region.getWorld().getName(), region.getCenter().getX()+0.5, region.getCenter().getY()+0.5, region.getCenter().getZ()+0.5, region.getWidth(), region.getHeight(), region.getLength());
     }
 
     public PlayerRegion(Player player) {
-        super(player);
+        this(WorldEditUtil.getRegion(player));
     }
 
     @Override
@@ -32,20 +33,6 @@ public class PlayerRegion extends Region {
         eX = ((getcX()) + (getWidth() / 2));
         eY = ((getcY()) + (getHeight() / 2));
         eZ = ((getcZ()) + (getLength() / 2));
-
-        if (sX < 0) sX--;
-        if (sY < 0) sY--;
-        if (sZ < 0) sZ--;
-        if (sX >= 0) sX++;
-        if (sY >= 0) sY++;
-        if (sZ >= 0) sZ++;
-
-        if (eX < 0) eX--;
-        if (eY < 0) eY--;
-        if (eZ < 0) eZ--;
-        if (eX >= 0) eX++;
-        if (eY >= 0) eY++;
-        if (eZ >= 0) eZ++;
 
     }
 

@@ -26,7 +26,8 @@ public class StageManager {
         for (int i = 0; i < files.length; i++) {
             File file = new File(folder, files[i]);
             plugin.logger(files[i]);
-            StageData data = (StageData) plugin.getRecorder().load(StageData.class, "stage", files[i].substring(0, files[i].length() - 4));
+
+            StageData data =  plugin.getRecorder().load(StageData.class, "stage", files[i].substring(0, files[i].length() - 4));
             canUse.add(data);
             allStage.add(data);
         }
