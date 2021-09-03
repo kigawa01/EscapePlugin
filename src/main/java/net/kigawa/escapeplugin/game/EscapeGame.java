@@ -7,6 +7,7 @@ import net.kigawa.escapeplugin.util.plugin.all.message.sender.InfoSender;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Hopper;
@@ -224,6 +225,7 @@ public class EscapeGame {
         Block block = door.getBlock();
         block.setType(Material.AIR);
         block.getRelative(BlockFace.UP).setType(Material.AIR);
+        PluginUtil.playSound(join, Sound.BLOCK_PISTON_EXTEND,10,1);
 
     }
 
