@@ -6,7 +6,7 @@
 
     <groupId>net.kigawa</groupId>
     <artifactId>EscapePlugin</artifactId>
-    <version>1.2a</version>
+    <version>1.3b</version>
     <packaging>jar</packaging>
 
     <name>EscapePlugin</name>
