@@ -12,7 +12,19 @@
 * kigawa
     * kigawa.8390@gmail.com
 
-# Version
+# About
+
+* 脱出ゲーム用プラグイン
+* コンフィグで名前の変更可能
+
+## Command
+
+* /escape
+* /gate
+
+# making
+
+## Version
 
 ### 例: 9.1a
 * **9.1a**
@@ -20,10 +32,6 @@
   * **9**: メジャー
   * **1**: マイナー
   * **a**: プラグインのバージョン アルファ(a)/ベータ(b)/推奨(R)
-
-# making
-
-
 
 ## ToDo
 * スタートメッセージ
@@ -37,7 +45,6 @@
 * コマンド部屋
 * エンドロール
 * hopper reset
-
 
 ## about
 

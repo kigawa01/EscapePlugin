@@ -37,11 +37,13 @@ public class EscapeGame {
     private GateManager gateManager;
     private boolean isStart;
     private boolean isSend;
+    private final String name;
 
     public EscapeGame(EscapePlugin escapePlugin, EscapeData escapeData, GateManager gateManager) {
         data = escapeData;
         this.plugin = escapePlugin;
         this.gateManager = gateManager;
+        name=plugin.getConfig().getString("name");
 
         for (String key : keysStr) {
             ItemStack itemStack = new ItemStack(Material.TRIPWIRE_HOOK);
@@ -66,7 +68,7 @@ public class EscapeGame {
                     count++;
                     switch (count) {
                         case 1:
-                            sendMessage("ある日突然、クラスメイトである小川から連絡が来た。");
+                            sendMessage("ある日突然、クラスメイトである"+name+"から連絡が来た。");
                             break;
                         case 2:
                             sendMessage("話によると、何者かにマイクラサーバーを乗っ取られてしまったらしい。");
@@ -78,7 +80,7 @@ public class EscapeGame {
                             sendMessage("代わりにこんなことをした犯人をBANして欲しいとのこと。");
                             break;
                         case 5:
-                            sendMessage("小川は、「存在をバレてから、犯人に見つからないようにヒントを残してきた。」とも言っていた。まずはヒントを探すところから始めよう。");
+                            sendMessage(name+"は、「存在をバレてから、犯人に見つからないようにヒントを残してきた。」とも言っていた。まずはヒントを探すところから始めよう。");
                             cancel();
                     }
                 }
@@ -142,7 +144,7 @@ public class EscapeGame {
                                 sendMessage("やっとの思いで見つけ出したコマンドブロックに触れようとしたその時、誰かの声が聞こえてくる。");
                                 break;
                             case 3:
-                                sendMessage("この声は、僕達に犯人のBANを依頼し、サポートしてくれた彼—— ——小川の声だった。");
+                                sendMessage("この声は、僕達に犯人のBANを依頼し、サポートしてくれた彼—— ——"+name+"の声だった。");
                                 break;
                             case 4:
                                 sendMessage("『BANされたんじゃないの？』 『なんでここに？』 と、色々な考えが湧いてくる。");
@@ -157,7 +159,7 @@ public class EscapeGame {
                                 sendMessage("理解が追いつかない。");
                                 break;
                             case 8:
-                                sendMessage("しかし、こちらの事など意にも介さず、小川は話を続ける。");
+                                sendMessage("しかし、こちらの事など意にも介さず、"+name+"は話を続ける。");
                                 break;
                             case 9:
                                 sendMessage(ChatColor.BLUE + "「寂しかったからノリで作ってたら途中から熱が入って....」");
